@@ -22,6 +22,7 @@ def first_calculator(r_side):
     firsts_tuple = () # this will hold the first`s
     firsts_tuple_wtout_eps = () # this will hold the first`s without epsilon
     is_epsilon = False # epsilon flag for return value
+    is_abs_epsilon = False # epsilon flag for return value(This will use for the ones that doesnt have epsilon directly)
     terminal_rules_list = [] # working list in loops
     if '|' in r_side:
         terminal_rules_list = r_side.split('|')
@@ -75,23 +76,19 @@ def first_calculator(r_side):
                         if rule_firsts_epsilon[1]:
                             main_tup = rule_firsts_epsilon[0]
                             main_tup += ('~',)
+                            is_abs_epsilon = True
                             print('the main Tup is {} and the INNER KEY is {}'.format(main_tup, letter))
+                            print('is_abs_epsilon {}'.format(is_abs_epsilon))
                             # final_firsts[letter] = main_tup
                             final_firsts[letter] = rule_firsts_epsilon[2]
                             print('final_firsts[IN] is  {}'.format(final_firsts))
                         else:
+                            is_abs_epsilon = False
                             firsts[letter] = rules_first_eps_to_save
                             final_firsts[letter] = rules_first_eps_to_save
                             print('final_firsts[OUT] is  {}'.format(final_firsts))
                             print('is epsilon is  {}'.format(rule_firsts_epsilon[1]))
                         conv_list_to_tuple = tuple(rule_firsts_epsilon[0])
-                        # if rule_firsts_epsilon[0]:
-                        #     firsts_tuple = firsts_tuple + conv_list_to_tuple
-                        #     firsts_tuple += ('~',)
-                        #     firsts_tuple_wtout_eps = firsts_tuple_wtout_eps + conv_list_to_tuple
-                        # else:
-                        #     firsts_tuple = firsts_tuple + conv_list_to_tuple
-                        #     firsts_tuple_wtout_eps = firsts_tuple_wtout_eps + conv_list_to_tuple
                         firsts_tuple = firsts_tuple + conv_list_to_tuple
                         firsts_tuple_wtout_eps = firsts_tuple_wtout_eps + conv_list_to_tuple
                         if rule_firsts_epsilon[1] == False:
@@ -109,8 +106,11 @@ def first_calculator(r_side):
                 print('The F Problem')
                 for_breaker = False
                 break
-
-    firsts_epsilon_answer_list.append(firsts_tuple_wtout_eps)          
+    if is_abs_epsilon:
+        is_epsilon = True
+        firsts_tuple += ('~',)
+    print('is_abs_epsilon222 {}'.format(is_abs_epsilon))
+    firsts_epsilon_answer_list.append(firsts_tuple_wtout_eps)       
     firsts_epsilon_answer_list.append(is_epsilon)
     firsts_epsilon_answer_list.append(firsts_tuple)
     print('the firsts with ~ is {}'.format(firsts_tuple))
@@ -141,10 +141,10 @@ for rules in grammmer_rules:
 # print('final_firsts[letter] is  {}'.format(final_firsts))
 
 print("The Firsts Are:")
-print('final_firsts[letter] is  {}'.format(final_firsts))
+# print('final_firsts[letter] is  {}'.format(final_firsts))
 for key, value in final_firsts.items():
     list_value = list(value) # Convert Value to list
-    print('the Final List Value is {}'.format(list_value)) 
+    # print('the Final List Value is {}'.format(list_value)) 
     tuple_value = set([i for i in list_value]) # using set to remove duplicate added values
     tuple_value = tuple(tuple_value) # Make tuple again to show in proper way
     print("First of {}: {}".format(key, tuple_value))

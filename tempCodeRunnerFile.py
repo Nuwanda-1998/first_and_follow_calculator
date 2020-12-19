@@ -1,5 +1,2 @@
-elif letter == '~':
-                #     print('Bye')
-                #     if not is_epsilon:
-                #         for_breaker = False
-                #         break
+ ('~',)
+                            print('the main Tup is {} and the INNER KEY is {}'.format(main_tup, letter))
