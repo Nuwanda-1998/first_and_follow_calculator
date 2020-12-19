@@ -51,6 +51,7 @@ def first_calculator(r_side):
                 'each letter in each rule'
                 print('in For Breaker')
                 if not letter.isupper() and not letter == '~':# changing the islower to not upper to make app able to recognize other signs instead of lower words
+                    is_abs_epsilon = False
                     print('Hello')
                     print('the letter is {}'.format(letter))
                     firsts_tuple += (letter,)
@@ -100,7 +101,10 @@ def first_calculator(r_side):
                         letter_firsts_list = list(letter_firsts)
                         for letter in letter_firsts_list:
                             firsts_tuple += (letter,)
-                            firsts_tuple_wtout_eps += (letter,)
+                            if letter == '~':
+                                is_abs_epsilon = True
+                            else:
+                                firsts_tuple_wtout_eps += (letter,)
                         # for_breaker = False
             else:
                 print('The F Problem')
@@ -148,6 +152,3 @@ for key, value in final_firsts.items():
     tuple_value = set([i for i in list_value]) # using set to remove duplicate added values
     tuple_value = tuple(tuple_value) # Make tuple again to show in proper way
     print("First of {}: {}".format(key, tuple_value))
-    
-
-
