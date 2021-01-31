@@ -1,0 +1,5 @@
+Z = S$
+S -> ACB|Cbb|Ba
+A -> da|BC
+B -> g|~
+C -> h|~
