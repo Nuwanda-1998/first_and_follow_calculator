@@ -51,6 +51,7 @@ def first_calculator(r_side):
                     break
                 elif letter == '~':
                     if not is_epsilon:
+                        is_epsilon = True # Added Now
                         firsts_tuple += ('~',)
                         for_breaker = False
                         break
@@ -84,7 +85,10 @@ def first_calculator(r_side):
                                 firsts_tuple_wtout_eps += (letter,)
             else:
                 for_breaker = False
-                break
+                # break # Commented Now
+            if is_abs_epsilon:
+                is_epsilon = True # Added Now
+                firsts_tuple += ('~',) # Added Now
     if is_abs_epsilon:
         is_epsilon = True
         firsts_tuple += ('~',)
@@ -118,7 +122,8 @@ for key, value in final_firsts.items():
     list_value = list(value) # Convert Value to list
     tuple_value = set([i for i in list_value]) # using set to remove duplicate added values
     tuple_value = tuple(tuple_value) # Make tuple again to show in proper way
-    print("First of {}: {}".format(key, tuple_value))
+    if not key == 'Z':
+        print("First of {}: {}".format(key, tuple_value))
 
 #######From Now Implementing Follows#######
 
